@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from .models import Emp
 
 
+def index(request):
+    return render(request, "index.html")
+
+
 def emp_home(request):
     emps=Emp.objects.all()
     return render(request,"home.html",{'emps':emps})
@@ -27,7 +31,7 @@ def add_emp(request):
         else:
             e.working=True
         e.save()
-        return redirect("/home/")
+        return redirect("/emp/home/")
     return render(request,"add_emp.html",{})
 
 def delete_emp(request,emp_id):
@@ -38,7 +42,7 @@ def delete_emp(request,emp_id):
 def update_emp(request,emp_id):
     emp=Emp.objects.get(pk=emp_id)
     print("Yes Bhai")
-    return render(request,"emp/update_emp.html",{
+    return render(request,"update_emp.html",{
         'emp':emp
     })
 
